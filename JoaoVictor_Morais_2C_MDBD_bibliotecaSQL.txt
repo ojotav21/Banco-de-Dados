@@ -1,0 +1,96 @@
+create database biblioteca;
+use biblioteca;
+
+CREATE TABLE bibliotecario (
+codFuncionario int PRIMARY KEY auto_increment,
+rg varchar(15) unique,
+cpf varchar(15) unique,
+dataNasc date,
+nome varchar(200),
+email varchar(200) unique,
+telefone varchar(200),
+uf varchar(2),
+cep varchar(9),
+bairro varchar(200),
+num varchar(200),
+complemento varchar(200),
+logradouro varchar(200),
+rua varchar(200),
+cidade varchar(200)
+);
+
+CREATE TABLE livro (
+codLivro int PRIMARY KEY auto_increment,
+autor  varchar(200),
+genero varchar(200),
+editora varchar(200),
+titulo varchar(200)
+);
+
+CREATE TABLE aluno (
+ra int PRIMARY KEY auto_increment,
+telfixo varchar(200),
+dataNasc date,
+telcel varchar(200),
+turma varchar(200),
+email varchar(200),
+nome varchar(200)
+);
+
+CREATE TABLE emprestimo_devolucao(
+dataDevolucao date,
+dataEmprestimo date,
+codEmprestimo int PRIMARY KEY auto_increment,
+codFuncionario int,
+codLivro int,
+ra int,
+FOREIGN KEY(ra) REFERENCES aluno (ra),
+FOREIGN KEY(codFuncionario) REFERENCES bibliotecario (codFuncionario),
+FOREIGN KEY(codLivro) REFERENCES livro (codLivro)
+);
+
+
+
+insert into bibliotecario (nome, email, dataNasc, cpf, telefone, logradouro, num, bairro, cep, cidade, uf) VALUES
+('Leticia Giolo','lelefofa2002@gmail.com','2002-05-24','xxx.xxx.xxx-xx','93454-8451','Rua Brasil','15', 'Bairro Nobre','45871-401','Sao Paulo','SP'),
+('Gisele Marques','gigig4ta2003@gmail.com','2003-06-27','yyy.yyy.yyy-yy','98754-1452','Rua Argentina','30', 'Bairro Nobreza','78547-321','Mauá','SP'),
+('Jean Alaminus','jeanlindu2003@gmail.com','2004-11-16','zzz.zzz.zzz-zz','94127-3654','Rua Urugrai','45', 'Bairro Nobres','402197-698','Ribeirao Pires','SP');
+
+
+insert into livro (titulo, autor, editora, genero) VALUES
+('A Menina que Roubava Livros','Markus Zusak','Intrinseca','Ficçao'),
+('Mitologia Nórdica','Neil Gaiman','Intrinseca','Literatura fantástica'),
+('A Sutil Arte de Ligar Foda-se','Mark Marson e Joana Faro','HarperOne','Autoajuda'),
+('O Diario de Nisha','Veera Hiranandani','Darkside','Ficçao'),
+('Em Algum Lugar nas Estrelas','Clare Vanderpool','Darkside','Ficçao de aventura'),
+('Roubada','Lesley Pearse','Editora Novo Conceito','Misterio'),
+('A História do Brasil','Mauricio Torre','Casa da Palavra','Referência Histórica'),
+('A Garota do Lago','Charlie Donlea','Faro Editorial','Misterio'),
+('O Pequeno Principe','Antoine de Saint-Exupery','Editora Novo Seculo','Literatura infantil'),
+('Poesia que transforma','Braulio Bessa','Sextante','Poesia');
+
+
+insert into aluno (nome, dataNasc, telcel, turma) VALUES
+('Joao Victor Morais','2003-10-21','99844-7213','2C'),
+('Joao Pedro Morais','2003-10-21','97854-7713','2C'),
+('Gustavo Henrique Silva Pinto','2004-11-22','99844-7213','2C'),
+('Eduardo Costa de Oliveira','2004-11-17','99124-7463','2C'),
+('Matheus Foresto Moselli','2004-05-13','99124-7463','2C'),
+('Vitor de Almeida Novaes Pimenta','2004-05-13','91244-7783','2C'),
+('Lionel Messi','2004-06-21','99124-1653','2C'),
+('Kakashi Hatake','2004-07-28','97891-7213','2C'),
+('Naruto Uzumaki','2003-10-21','97854-6324','2C'),
+('Itachi Uchiha','2003-08-01','93614-7213','2C');
+
+
+insert into emprestimo_devolucao (codFuncionario, codLivro, ra, dataEmprestimo, dataDevolucao) VALUES
+(1,1,1,'2020-06-29', '2020-07-15'),
+(2,2,2,'2020-06-29', '2020-07-15'),
+(3,3,3,'2020-06-30', '2020-07-16'),
+(1,4,4,'2020-05-17', '2020-06-07'),
+(2,5,5,'2020-07-01', '2020-07-15'),
+(3,6,6,'2020-08-14', '2020-08-28'),
+(1,7,7,'2020-09-12', '2020-07-26'),
+(2,8,8,'2020-06-29', '2020-07-15'),
+(3,9,9,'2020-06-24', '2020-07-13'),
+(1,10,10,'2020-05-29', '2020-06-15');
