@@ -1,0 +1,149 @@
+create database biblioteca;
+use biblioteca;
+
+CREATE TABLE bibliotecario (
+codFuncionario int PRIMARY KEY auto_increment,
+rg varchar(15) unique,
+cpf varchar(15) unique,
+dataNasc date,
+nome varchar(200),
+email varchar(200) unique,
+telefone varchar(200),
+uf varchar(2),
+cep varchar(9),
+bairro varchar(200),
+num varchar(200),
+complemento varchar(200),
+logradouro varchar(200),
+rua varchar(200),
+cidade varchar(200)
+);
+
+CREATE TABLE livro (
+codLivro int PRIMARY KEY auto_increment,
+autor  varchar(200),
+genero varchar(200),
+editora varchar(200),
+titulo varchar(200)
+);
+
+CREATE TABLE aluno (
+ra int PRIMARY KEY auto_increment,
+telfixo varchar(200),
+dataNasc date,
+telcel varchar(200),
+turma varchar(200),
+email varchar(200),
+nome varchar(200)
+);
+
+CREATE TABLE emprestimo_devolucao(
+dataDevolucao date,
+dataEmprestimo date,
+codEmprestimo int PRIMARY KEY auto_increment,
+codFuncionario int,
+codLivro int,
+ra int,
+FOREIGN KEY(ra) REFERENCES aluno (ra),
+FOREIGN KEY(codFuncionario) REFERENCES bibliotecario (codFuncionario),
+FOREIGN KEY(codLivro) REFERENCES livro (codLivro)
+);
+
+
+insert into bibliotecario (nome, email, dataNasc, cpf, telefone, logradouro, num, bairro, cep, cidade, uf) VALUES
+('Leticia Giolo','lelefofa2002@gmail.com','2002-05-24','xxx.xxx.xxx-xx','93454-8451','Rua Brasil','15', 'Bairro Nobre','45871-401','Sao Paulo','SP'),
+('Gisele Marques','gigig4ta2003@gmail.com','2003-06-27','yyy.yyy.yyy-yy','98754-1452','Rua Argentina','30', 'Bairro Nobreza','78547-321','Mauá','SP'),
+('Jean Alaminus','jeanlindu2003@gmail.com','2004-11-16','zzz.zzz.zzz-zz','94127-3654','Rua Urugrai','45', 'Bairro Nobres','402197-698','Ribeirao Pires','SP');
+
+insert into livro (titulo, autor, editora, genero) VALUES
+('A Menina que Roubava Livros','Markus Zusak','Intrinseca','Ficçao'),
+('Mitologia Nórdica','Neil Gaiman','Intrinseca','Literatura fantástica'),
+('A Sutil Arte de Ligar Foda-se','Mark Marson e Joana Faro','HarperOne','Autoajuda'),
+('O Diario de Nisha','Veera Hiranandani','Darkside','Ficçao'),
+('Em Algum Lugar nas Estrelas','Clare Vanderpool','Darkside','Ficçao de aventura'),
+('Roubada','Lesley Pearse','Editora Novo Conceito','Misterio'),
+('A História do Brasil','Mauricio Torre','Casa da Palavra','Referência Histórica'),
+('A Garota do Lago','Charlie Donlea','Faro Editorial','Misterio'),
+('O Pequeno Principe','Antoine de Saint-Exupery','Editora Novo Seculo','Literatura infantil'),
+('Poesia que transforma','Braulio Bessa','Sextante','Poesia');
+
+insert into aluno (nome, dataNasc, telcel, email, turma) VALUES
+('Joao Victor Morais','2003-10-21','99844-7213','ojotavzinho789@gmail.com','2C'),
+('Joao Pedro Morais','2003-10-21','97854-7713','johndesenhista@gmail.com','2C'),
+('Gustavo Henrique Silva Pinto','2004-11-22','99844-7213','gustavinhoObala@gmail.com','2C'),
+('Eduardo Costa de Oliveira','2004-11-17','99124-7463','duducosta77@gmail.com','2C'),
+('Matheus Foresto Moselli','2004-05-13','99124-7463','littletheusdamassa@gmail.com','2C'),
+('Vitor de Almeida Novaes Pimenta','2004-05-13','91244-7783','vitaoformigasroxo45@gmail.com','2C'),
+('Lionel Messi','2004-06-21','99124-1653','goatofthefutebol12@gmail.com','1F'),
+('Kakashi Hatake','2004-07-28','97891-7213','oninjadosmiljutsus1000@gmail.com','3C'),
+('Naruto Uzumaki','2003-10-21','97854-6324','osetimohokage7@gmail.com','3C'),
+('Itachi Uchiha','2003-08-01','93614-7213','akatsukitachi7@gmail.com','2A');
+
+insert into emprestimo_devolucao (codFuncionario, codLivro, ra, dataEmprestimo, dataDevolucao) VALUES
+(1,1,1,'2020-06-29', '2020-07-15'),
+(2,2,2,'2020-06-29', '2020-07-15'),
+(3,3,3,'2020-06-30', '2020-07-16'),
+(1,4,4,'2020-05-17', '2020-06-07'),
+(2,5,5,'2020-07-01', '2020-07-15'),
+(3,6,6,'2020-08-14', '2020-08-28'),
+(1,7,7,'2020-09-12', '2020-07-26'),
+(2,8,8,'2020-06-29', '2020-07-15'),
+(3,9,9,'2020-06-24', '2020-07-13'),
+(1,10,10,'2020-05-29', '2020-06-15');
+
+alter table livro add column pags int;
+alter table livro add column qtdeExemplares int;
+
+update livro set pags = '340', qtdeExemplares = '5' where codLivro = 1;
+update livro set pags = '260', qtdeExemplares = '7' where codLivro = 2;
+update livro set pags = '150', qtdeExemplares = '8' where codLivro = 3;
+update livro set pags = '328', qtdeExemplares = '9' where codLivro = 4;
+update livro set pags = '284', qtdeExemplares = '4' where codLivro = 5;
+update livro set pags = '147', qtdeExemplares = '3' where codLivro = 6;
+update livro set pags = '257', qtdeExemplares = '6' where codLivro = 7;
+update livro set pags = '135', qtdeExemplares = '7' where codLivro = 8;
+update livro set pags = '354', qtdeExemplares = '8' where codLivro = 9;
+update livro set pags = '625', qtdeExemplares = '2' where codLivro = 10;
+
+----------------------SELECT----------------------------------------
+
+1) SELECT nome, dataNasc FROM `aluno` WHERE nome LIKE 'j%';
+
+2) SELECT nome, email, dataNasc FROM `aluno` WHERE month(dataNasc) = '05';
+
+3) SELECT nome, telcel, dataNasc FROM `aluno` WHERE year(dataNasc) = '2003'
+
+4) SELECT * FROM `aluno` order by turma desc;
+
+5) SELECT titulo, autor, genero FROM `livro` WHERE genero LIKE '%Ficção%';
+   SELECT titulo, autor, genero FROM `livro` WHERE genero= 'Ficção';
+
+6) SELECT count(*) FROM `livro`;
+
+7) SELECT autor, titulo FROM `livro` WHERE autor = 'Markus Zusak';
+
+8) SELECT dataEmprestimo, dataDevolucao FROM `emprestimo_devolucao` WHERE month(dataEmprestimo) ='05';
+
+9) SELECT dataEmprestimo, dataDevolucao, ra FROM `emprestimo_devolucao` WHERE dataEmprestimo BETWEEN '2019-01-01' AND '2020-12-31';
+
+10) SELECT nome, cidade, uf FROM `bibliotecario` WHERE cidade = 'São Paulo';
+
+11) SELECT nome FROM `bibliotecario` ORDER by nome
+
+12) SELECT titulo, autor, genero FROM `livro` ORDER by genero;
+
+13) SELECT titulo, autor, genero, editora FROM `livro` WHERE editora like 'Intrinseca';
+
+14) SELECT titulo, autor, genero, pags FROM `livro` WHERE (autor LIKE '%Zusak%' OR genero LIKE '%Misterio%') and pags <200;
+
+15) SELECT titulo, autor, genero, pags FROM `livro` WHERE (titulo LIKE 'A%' AND genero LIKE '%Misterio%');
+
+16) SELECT avg(pags) FROM`livro`;
+
+17) SELECT sum(pags) FROM `livro`  SELECT min(pags),titulo FROM `livro`  
+    SELECT min(pags) FROM `livro` 
+    SELECT MAX(pags) FROM `livro`
+
+18) SELECT titulo, autor, qtdeExemplares FROM `livro` WHERE qtdeExemplares BETWEEN '4'and '6'
+
+
