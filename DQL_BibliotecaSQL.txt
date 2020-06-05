@@ -1,0 +1,42 @@
+----------------------SELECT----------------------------------------
+
+1) SELECT nome, dataNasc FROM `aluno` WHERE nome LIKE 'j%';
+
+2) SELECT nome, email, dataNasc FROM `aluno` WHERE month(dataNasc) = '05';
+
+3) SELECT nome, telcel, dataNasc FROM `aluno` WHERE year(dataNasc) = '2003'
+
+4) SELECT * FROM `aluno` order by turma desc;
+
+5) SELECT titulo, autor, genero FROM `livro` WHERE genero LIKE '%Ficção%';
+   SELECT titulo, autor, genero FROM `livro` WHERE genero= 'Ficção';
+
+6) SELECT count(*) FROM `livro`;
+
+7) SELECT autor, titulo FROM `livro` WHERE autor = 'Markus Zusak';
+
+8) SELECT dataEmprestimo, dataDevolucao FROM `emprestimo_devolucao` WHERE month(dataEmprestimo) ='05';
+
+9) SELECT dataEmprestimo, dataDevolucao, ra FROM `emprestimo_devolucao` WHERE dataEmprestimo BETWEEN '2019-01-01' AND '2020-12-31';
+
+10) SELECT nome, cidade, uf FROM `bibliotecario` WHERE cidade = 'São Paulo';
+
+11) SELECT nome FROM `bibliotecario` ORDER by nome
+
+12) SELECT titulo, autor, genero FROM `livro` ORDER by genero;
+
+13) SELECT titulo, autor, genero, editora FROM `livro` WHERE editora like 'Intrinseca';
+
+14) SELECT titulo, autor, genero, pags FROM `livro` WHERE (autor LIKE '%Zusak%' OR genero LIKE '%Misterio%') and pags <200;
+
+15) SELECT titulo, autor, genero, pags FROM `livro` WHERE (titulo LIKE 'A%' AND genero LIKE '%Misterio%');
+
+16) SELECT avg(pags) FROM`livro`;
+
+17) SELECT sum(pags) FROM `livro`  
+    SELECT min(pags) FROM `livro` 
+    SELECT MAX(pags) FROM `livro`
+
+18) SELECT titulo, autor, qtdeExemplares FROM `livro` WHERE qtdeExemplares BETWEEN '4'and '6'
+
+
